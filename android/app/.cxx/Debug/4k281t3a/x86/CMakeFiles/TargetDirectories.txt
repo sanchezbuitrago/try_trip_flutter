@@ -1,0 +1,2 @@
+/home/sanchezbuitrago/StudioProjects/try_trip/android/app/.cxx/Debug/4k281t3a/x86/CMakeFiles/edit_cache.dir
+/home/sanchezbuitrago/StudioProjects/try_trip/android/app/.cxx/Debug/4k281t3a/x86/CMakeFiles/rebuild_cache.dir
