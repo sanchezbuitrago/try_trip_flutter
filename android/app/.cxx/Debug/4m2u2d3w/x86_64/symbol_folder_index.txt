@@ -1,0 +1,1 @@
+/home/dev/git/try_trip_flutter/build/app/intermediates/cxx/Debug/4m2u2d3w/obj/x86_64

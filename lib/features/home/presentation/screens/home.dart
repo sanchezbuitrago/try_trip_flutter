@@ -1,9 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:try_trip/core/services/routes.dart';
 import 'package:try_trip/core/widgets/drawer.dart';
-import 'package:try_trip/core/widgets/buttons.dart';
-import 'package:try_trip/features/home/domain/view_model/session.dart';
+import 'package:try_trip/core/widgets/progress_bar.dart';
 import 'package:try_trip/features/home/domain/model/state.dart';
+import 'package:try_trip/features/home/domain/view_model/session.dart';
+import 'package:try_trip/features/home/presentation/widgets/module_card.dart';
 
 class TryTripHomePage extends StatefulWidget {
   const TryTripHomePage({super.key, required this.title});
@@ -16,87 +20,125 @@ class TryTripHomePage extends StatefulWidget {
 
 class _TryTripHomePageState extends State<TryTripHomePage> {
   HomeState homeState = HomeState();
-  int _counter = 0;
-  String message = 'You have pushed the button this many times:';
   SessionViewModel sessionViewModel = SessionViewModel();
+  List<ModuleCard> modules = [];
 
   @override
   void initState() {
+    modules = [
+      ModuleCard(
+          name: "Restaurantes",
+          icon: Icons.fastfood_outlined,
+          onTap: () {
+            AppRoutes.navigateTo(context, AppRoutes.restaurants);
+          }),
+      ModuleCard(
+          name: "Actividades",
+          icon: Icons.videogame_asset_sharp,
+          onTap: () {
+            AppRoutes.navigateTo(context, AppRoutes.activities);
+          }),
+      ModuleCard(
+          name: "Hoteles",
+          icon: Icons.hotel,
+          onTap: () {
+            AppRoutes.navigateTo(context, AppRoutes.hotels);
+          }),
+    ];
     super.initState();
     validateSession();
   }
 
-  void updateState(HomeState state){
+  void updateState(HomeState state) {
     setState(() {
       homeState = state;
     });
   }
 
-  void setIsLoading(){
+  void setIsLoading() {
     homeState.isLoading = true;
     setState(() {
       homeState = homeState;
     });
   }
 
-  void goToUserRegister(){
-    AppRoutes.resetTo(context, AppRoutes.userRegister);
+  void goToLogin() {
+    AppRoutes.resetTo(context, AppRoutes.login);
   }
 
   void validateSession() async {
-    print("__________________________________________-");
+    print("Validando sesion");
+    setState(() {
+      homeState.isLoading = true;
+    });
     bool sessionIsValid = await sessionViewModel.sessionIsValid();
-    if (!sessionIsValid){
-      goToUserRegister();
+    print("Sesion validada");
+    print(sessionIsValid);
+    if (!sessionIsValid) {
+      goToLogin();
+    } else {
+      setState(() {
+        homeState.isLoading = false;
+      });
     }
-    setState(() {
-      homeState.isLoading = false;
-      if (sessionIsValid){
-        message = "La session es valida";
-      }else{
-        message = "Se debe retornar a la pantalla de inicio";
-      }
-    });
-
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           widget.title,
           style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
-      drawer: const DefaultDrawer(),
-      body: Container(
-        color: Theme.of(context).colorScheme.secondary,
-        child: Center(
-          child: homeState.isLoading ? CircularProgressIndicator() : Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(message,
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary)),
-              Text('$_counter',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary)),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: DefaultButtonNavigationBar(
-          onPressed: _incrementCounter,
-          child: Icon(Icons.add, color: Theme.of(context).colorScheme.onPrimary)
-      )
+      drawer: DefaultDrawer(),
+      body: homeState.isLoading
+          ? DefaultProgressIndicator()
+          : Column(
+              children: [
+                Expanded(
+                    child: Container(
+                  color: Theme.of(context).colorScheme.secondary,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        child: Center(
+                            child: Text(
+                          "¿ Qué quieres conocer hoy ?",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        )),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 5,
+                              mainAxisSpacing: 5,
+                              childAspectRatio: 1.0,
+                            ),
+                            itemCount: modules
+                                .length, // Número de elementos en la grilla
+                            itemBuilder: (context, index) {
+                              return modules[index];
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ))
+              ],
+            ),
     );
   }
 }

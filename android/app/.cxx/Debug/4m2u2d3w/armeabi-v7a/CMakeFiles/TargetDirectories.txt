@@ -1,0 +1,2 @@
+/home/dev/git/try_trip_flutter/android/app/.cxx/Debug/4m2u2d3w/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/dev/git/try_trip_flutter/android/app/.cxx/Debug/4m2u2d3w/armeabi-v7a/CMakeFiles/rebuild_cache.dir

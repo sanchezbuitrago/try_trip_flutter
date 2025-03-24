@@ -1,8 +1,15 @@
-import 'package:country_code_picker/country_code_picker.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:try_trip/core/widgets/drawer.dart';
+
+// Package imports:
+import 'package:country_code_picker/country_code_picker.dart';
+
+// Project imports:
+import 'package:try_trip/core/services/routes.dart';
+import 'package:try_trip/core/widgets/alerts.dart';
 import 'package:try_trip/core/widgets/buttons.dart';
 import 'package:try_trip/core/widgets/text_form_fields.dart';
+import 'package:try_trip/features/authentication/presentation/view_models/user.dart';
 
 class UserRegisterPage extends StatefulWidget {
   const UserRegisterPage({super.key});
@@ -23,21 +30,37 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
   String _countryCode = '+57';
   bool _pinMatch = true;
 
-  void submit() {
-    if (_pinController.text == _pinConfirmationController.text) {
-      setState(() {
-        _pinMatch = true;
-      });
-      if (_formKey.currentState?.validate() ?? false) {
-        // Si el formulario es válido, mostrar un mensaje
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Registrando...')));
-        // Aquí podrías manejar el registro, por ejemplo, enviando los datos a un servidor.
+  SuccessAlert successAlert = SuccessAlert();
+  ErrorAlert errorAlert = ErrorAlert();
+  UserViewModel userViewModel = UserViewModel();
+
+  void registerUser() async {
+    try {
+      await userViewModel.registerUser();
+      if (mounted) {
+        successAlert.show(context, () {
+          AppRoutes.goBack(context);
+          AppRoutes.navigateTo(context, AppRoutes.login);
+        });
       }
-    } else {
-      setState(() {
-        _pinMatch = false;
-      });
+    } catch (e) {
+      if (mounted) {
+        errorAlert.show(
+            context: context,
+            alertText: "Error registrando el usuario",
+            onConfirm: () {
+              AppRoutes.goBack(context);
+            });
+      }
+    }
+  }
+
+  void submit() {
+    setState(() {
+      _pinMatch = _pinController.text == _pinConfirmationController.text;
+    });
+    if ((_formKey.currentState?.validate() ?? false) && _pinMatch) {
+      registerUser();
     }
   }
 
@@ -52,10 +75,10 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
           style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
-      drawer: const DefaultDrawer(),
       body: Column(
         children: [
-          Expanded(child: Container(
+          Expanded(
+              child: Container(
             color: Theme.of(context).colorScheme.secondary,
             padding: EdgeInsets.all(20),
             child: SingleChildScrollView(
@@ -112,7 +135,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                         }
                         // Validación simple para correo
                         if (!RegExp(
-                            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
                             .hasMatch(value)) {
                           return 'Por favor ingrese un correo válido';
                         }
