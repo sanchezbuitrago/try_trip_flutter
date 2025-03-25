@@ -24,3 +24,7 @@ flutter pub run import_sorter:main
 Format code
 
 dart format .
+
+Generar archivos de i18n
+
+flutter pub run intl_utils:generate

@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:try_trip/core/model/constants.dart';
 
 // Project imports:
 import 'package:try_trip/core/services/routes.dart';
@@ -8,6 +9,8 @@ import 'package:try_trip/core/widgets/buttons.dart';
 import 'package:try_trip/core/widgets/progress_bar.dart';
 import 'package:try_trip/core/widgets/text_form_fields.dart';
 import 'package:try_trip/features/authentication/presentation/view_models/login.dart';
+
+import 'package:try_trip/generated/l10n.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -40,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   void _handleInvalidCredentialsState(InvalidCredentialsState state){
     errorAlert.show(
         context: context,
-        alertText: "Credenciales no validas",
+        alertText: S.of(context).loginInvalidCredentialsMessage,
         onConfirm: (){
           AppRoutes.goBack(context);
         }
@@ -50,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
   void _handleConnectionErrorState(ConnectionErrorState state){
     errorAlert.show(
         context: context,
-        alertText: "Error en la conexion al servicio, verifica tú internet",
+        alertText: S.of(context).loginConnectionErrorMessage,
         onConfirm: (){
           AppRoutes.goBack(context);
         }
@@ -116,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          "Inicio de Sesion",
+          S.of(context).loginAppBarTitle,
           style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
@@ -152,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Center(
                           child: Text(
-                            "Iniciar Sesion",
+                            S.of(context).loginTitle,
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onSecondary,
@@ -163,17 +166,15 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       DefaultTextFormField(
                         controller: _emailController,
-                        labelText: 'Correo electrónico',
+                        labelText: S.of(context).loginEmailLabelText,
                         textInputType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Por favor ingrese su correo electrónico';
+                            return S.of(context).loginEmailNotFoundError;
                           }
                           // Validación simple para correo
-                          if (!RegExp(
-                                  r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                              .hasMatch(value)) {
-                            return 'Por favor ingrese un correo válido';
+                          if (!RegExp(emailRegex).hasMatch(value)) {
+                            return S.of(context).loginEmailNotValidError;
                           }
                           return null;
                         },
@@ -182,16 +183,16 @@ class _LoginPageState extends State<LoginPage> {
                       // PIN de 4 dígitos
                       DefaultTextFormField(
                         controller: _pinController,
-                        labelText: 'PIN',
+                        labelText: S.of(context).loginPINLabelText,
                         textInputType: TextInputType.number,
                         maxLength: 4,
                         obscureText: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Por favor ingrese su PIN';
+                            return S.of(context).loginPINNotFoundError;
                           }
                           if (value.length != 4) {
-                            return 'El PIN debe tener 4 dígitos';
+                            return S.of(context).loginPINNotValidError;
                           }
                           return null;
                         },
@@ -202,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                               context, AppRoutes.forgotPassword);
                         },
                         child: Text(
-                          '¿ Olvidaste tú PIN ?',
+                          S.of(context).loginForgotPINLink,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSecondary,
                             decoration: TextDecoration.underline,
@@ -215,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                           Expanded(
                               child: DefaultButtonNavigationBar(
                             onPressed: _submit,
-                            child: Text("Iniciar Sesion"),
+                            child: Text(S.of(context).loginActionButton),
                           ))
                         ],
                       ),
@@ -226,14 +227,14 @@ class _LoginPageState extends State<LoginPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("¿ Eres usuario nuevo ? "),
+                                Text(S.of(context).loginNewUserText),
                                 GestureDetector(
                                   onTap: () {
                                     AppRoutes.navigateTo(
                                         context, AppRoutes.userRegister);
                                   },
                                   child: Text(
-                                    "Registrate",
+                                    S.of(context).loginRegisterButtonLabel,
                                     style: TextStyle(
                                         decoration: TextDecoration.underline),
                                   ),
@@ -243,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                             Container(
                               margin: EdgeInsets.only(top: 5),
                               child: Text(
-                                "TryTrip 0.0.0",
+                                S.of(context).loginVersionLabel,
                                 style: TextStyle(fontSize: 12),
                               ),
                             )

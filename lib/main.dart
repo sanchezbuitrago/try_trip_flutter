@@ -1,9 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 // Project imports:
 import 'package:try_trip/core/services/routes.dart';
-import 'features/home/home.dart';
+
+import 'generated/l10n.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +30,15 @@ class MyApp extends StatelessWidget {
       navigatorKey: AppRoutes.navigatorKey,
       onGenerateRoute: AppRoutes.generateRoute,
       initialRoute: AppRoutes.home,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        S.delegate,
+      ],
+      locale: Locale('es', 'ES'),
+      supportedLocales: [
+        Locale('es', ''),
+      ],
     );
   }
 }

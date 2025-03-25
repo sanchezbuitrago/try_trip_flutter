@@ -1,0 +1,19 @@
+{
+  "@@locale": "es",
+  "hello": "Hello",
+  "loginActionButton": "Iniciar Sesion",
+  "loginNewUserText": "¿ Eres usuario nuevo ?",
+  "loginInvalidCredentialsMessage": "Credenciales no validas",
+  "loginConnectionErrorMessage": "Error en la conexion al servicio, verifica tú internet",
+  "loginAppBarTitle": "Inicio de Sesion",
+  "loginTitle": "Iniciar Sesion",
+  "loginEmailLabelText": "Correo electronico",
+  "loginEmailNotFoundError": "Por favor ingrese su correo electrónico",
+  "loginEmailNotValidError": "Por favor ingrese un correo válido",
+  "loginPINLabelText": "PIN",
+  "loginPINNotFoundError": "Por favor ingrese un PIN",
+  "loginPINNotValidError": "El PIN no cumple con la longitud requerida",
+  "loginForgotPINLink": "Olvidaste tú PIN ?",
+  "loginRegisterButtonLabel": "Registrate",
+  "loginVersionLabel": "TryTrip 0.0.0"
+}
