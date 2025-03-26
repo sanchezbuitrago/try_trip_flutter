@@ -1,11 +1,15 @@
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
 import 'package:http/http.dart' as http;
+
+// Project imports:
 import 'package:try_trip/core/utils/http.dart';
+import 'package:try_trip/core/utils/logger.dart';
+import 'package:try_trip/core/utils/secure_storage.dart';
 import 'package:try_trip/features/authentication/domain/models/commands.dart';
 import 'package:try_trip/features/authentication/domain/models/exceptions.dart';
-import 'package:try_trip/core/utils/secure_storage.dart';
-import 'package:try_trip/core/utils/logger.dart';
 
 class UserController {
   AbstractHttpClient httpClient = HttpClient();
@@ -16,7 +20,8 @@ class UserController {
     _logger.logInfo("Try to register user with email ${cmd.email}");
     const String host = "10.0.2.2:3030";
     const String path = "/users/login";
-    GenericResponse response = await httpClient.post(host: host, path: path, body: {
+    GenericResponse response =
+        await httpClient.post(host: host, path: path, body: {
       "names": cmd.names,
       "surname": cmd.surname,
       "email": cmd.email,
@@ -24,22 +29,22 @@ class UserController {
       "phone_number": cmd.phoneNumber,
       "country_code": cmd.countryCode
     });
-    if(!response.success){
+    if (!response.success) {
       throw Exception("Error registrando el usuario");
     }
   }
+
   Future<void> doLogin(DoLoginCommand cmd) async {
     _logger.logInfo("Try to do login using the email ${cmd.email}");
     const String host = "10.0.2.2:3030";
     const String path = "/users/login";
 
-    try{
-      GenericResponse response = await httpClient.post(host: host, path: path, body: {
-        "email": cmd.email,
-        "pin": cmd.pin
-      });
-      if(!response.success){
-        _logger.logError("Error doing login, the service had a fail response, status_code: ${response.statusCode.toString()}");
+    try {
+      GenericResponse response = await httpClient.post(
+          host: host, path: path, body: {"email": cmd.email, "pin": cmd.pin});
+      if (!response.success) {
+        _logger.logError(
+            "Error doing login, the service had a fail response, status_code: ${response.statusCode.toString()}");
         throw GenericErrorInLoginProcess();
       }
 
@@ -61,7 +66,7 @@ class UserController {
     }
   }
 
-  void closeSession(){
+  void closeSession() {
     _secureStorage.delete(SecureStorageKey.refreshToken);
     _secureStorage.delete(SecureStorageKey.accessToken);
   }

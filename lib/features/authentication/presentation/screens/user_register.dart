@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:try_trip/core/model/constants.dart';
 
 // Project imports:
+import 'package:try_trip/core/model/constants.dart';
 import 'package:try_trip/core/services/routes.dart';
+import 'package:try_trip/core/utils/logger.dart';
 import 'package:try_trip/core/widgets/alerts.dart';
 import 'package:try_trip/core/widgets/buttons.dart';
 import 'package:try_trip/core/widgets/text_form_fields.dart';
 import 'package:try_trip/features/authentication/presentation/view_models/register_user.dart';
-
 import 'package:try_trip/generated/l10n.dart';
-
-import 'package:try_trip/core/utils/logger.dart';
 
 class UserRegisterPage extends StatefulWidget {
   const UserRegisterPage({super.key});
@@ -43,14 +41,15 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
   RegisterUserViewModel registerUserViewModel = RegisterUserViewModel();
   final CustomLogger _logger = CustomLogger.instance;
 
-  void _handleUserRegisteredState(RegisterUserState state){
+  void _handleUserRegisteredState(RegisterUserState state) {
     successAlert.show(context, () {
       AppRoutes.goBack(context);
       AppRoutes.navigateTo(context, AppRoutes.login);
     });
   }
 
-  void _handleRegisterUserGenericErrorState(UserRegisterGenericErrorState state){
+  void _handleRegisterUserGenericErrorState(
+      UserRegisterGenericErrorState state) {
     errorAlert.show(
         context: context,
         alertText: S.of(context).registerGenericError,
@@ -59,13 +58,14 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
         });
   }
 
-  void _processLoginState(RegisterUserState state){
+  void _processLoginState(RegisterUserState state) {
     switch (state.runtimeType) {
       case UserRegisteredSate:
         _handleUserRegisteredState(state as UserRegisteredSate);
         break;
       case UserRegisterGenericErrorState:
-        _handleRegisterUserGenericErrorState(state as UserRegisterGenericErrorState);
+        _handleRegisterUserGenericErrorState(
+            state as UserRegisterGenericErrorState);
         break;
       default:
         _logger.logError("State not supported ${state.runtimeType.toString()}");
@@ -74,13 +74,13 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
     _deactivateLoader();
   }
 
-  void _activeLoader(){
+  void _activeLoader() {
     setState(() {
       isLoading = true;
     });
   }
 
-  void _deactivateLoader(){
+  void _deactivateLoader() {
     setState(() {
       isLoading = false;
     });
@@ -98,8 +98,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
           _emailController.text,
           _pinController.text,
           _countryCode,
-          _phoneController.text
-      );
+          _phoneController.text);
       _processLoginState(response);
     }
   }
@@ -155,7 +154,9 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                       labelText: S.of(context).registerFormLastNameLabelText,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return S.of(context).registerFormLastNameNotFoundError;
+                          return S
+                              .of(context)
+                              .registerFormLastNameNotFoundError;
                         }
                         return null;
                       },
@@ -193,22 +194,28 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                             padding: EdgeInsets.zero,
                             showFlag: true,
                             searchDecoration: InputDecoration(
-                              labelText: S.of(context).registerFormCountryLabelText,
-                              hintText: S.of(context).registerFormCountryHintText,
+                              labelText:
+                                  S.of(context).registerFormCountryLabelText,
+                              hintText:
+                                  S.of(context).registerFormCountryHintText,
                             ),
                             textStyle: TextStyle(fontSize: 16),
-                            dialogBackgroundColor: Theme.of(context).colorScheme.secondary,
+                            dialogBackgroundColor:
+                                Theme.of(context).colorScheme.secondary,
                             barrierColor: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                         Flexible(
                           child: DefaultTextFormField(
                             controller: _phoneController,
-                            labelText: S.of(context).registerFormPhoneNumberLabelText,
+                            labelText:
+                                S.of(context).registerFormPhoneNumberLabelText,
                             textInputType: TextInputType.phone,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return S.of(context).registerFormPhoneNumberNotFoundError;
+                                return S
+                                    .of(context)
+                                    .registerFormPhoneNumberNotFoundError;
                               }
                               return null;
                             },
@@ -228,7 +235,9 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                             obscureText: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return S.of(context).registerFormPINNotFoundError;
+                                return S
+                                    .of(context)
+                                    .registerFormPINNotFoundError;
                               }
                               if (value.length != 4) {
                                 return S.of(context).registerFormPINNotValid;
@@ -241,16 +250,21 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                         Flexible(
                           child: DefaultTextFormField(
                             controller: _pinConfirmationController,
-                            labelText: S.of(context).registerFormSecondPINLabelText,
+                            labelText:
+                                S.of(context).registerFormSecondPINLabelText,
                             textInputType: TextInputType.number,
                             maxLength: 4,
                             obscureText: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return S.of(context).registerFormSecondPINNotFoundError;
+                                return S
+                                    .of(context)
+                                    .registerFormSecondPINNotFoundError;
                               }
                               if (value.length != 4) {
-                                return S.of(context).registerFormSecondPINNotValid;
+                                return S
+                                    .of(context)
+                                    .registerFormSecondPINNotValid;
                               }
                               return null;
                             },
@@ -263,7 +277,9 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          !_pinMatch ? S.of(context).registerFormPINsNotMatch : '',
+                          !_pinMatch
+                              ? S.of(context).registerFormPINsNotMatch
+                              : '',
                           style: TextStyle(
                             color: Color(0xFFB00020),
                             fontSize: 14,

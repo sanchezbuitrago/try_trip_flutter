@@ -30,36 +30,48 @@ class GenericResponse {
 }
 
 abstract class AbstractHttpClient {
-  Future<GenericResponse> get({required String host, required String path, queryStrings = const {}});
-  Future<GenericResponse> post({required String host, required String path, Map<String, String> body = const {}});
+  Future<GenericResponse> get(
+      {required String host, required String path, queryStrings = const {}});
+  Future<GenericResponse> post(
+      {required String host,
+      required String path,
+      Map<String, String> body = const {}});
 }
 
-
-class FakeHttpClient extends AbstractHttpClient{
+class FakeHttpClient extends AbstractHttpClient {
   GenericResponse? getResponse;
   GenericResponse? postResponse;
 
   FakeHttpClient({this.getResponse, this.postResponse});
   @override
-  Future<GenericResponse> get({required String host, required String path, queryStrings = const {}}) async {
-    if(getResponse != null){
+  Future<GenericResponse> get(
+      {required String host,
+      required String path,
+      queryStrings = const {}}) async {
+    if (getResponse != null) {
       throw Exception("Response not provider");
     }
     return getResponse!;
   }
+
   @override
-  Future<GenericResponse> post({required String host, required String path, Map<String, String> body = const {}}) async {
-    if(postResponse != null){
+  Future<GenericResponse> post(
+      {required String host,
+      required String path,
+      Map<String, String> body = const {}}) async {
+    if (postResponse != null) {
       throw Exception("Response not provider");
     }
     return postResponse!;
   }
 }
 
-class HttpClient extends AbstractHttpClient{
+class HttpClient extends AbstractHttpClient {
   @override
   Future<GenericResponse> get(
-      {required String host, required String path, queryStrings = const {}}) async {
+      {required String host,
+      required String path,
+      queryStrings = const {}}) async {
     Uri url = Uri.https(host, path, queryStrings);
     http.Response response = await http.get(url);
     return _parseResponse(response);
@@ -67,7 +79,9 @@ class HttpClient extends AbstractHttpClient{
 
   @override
   Future<GenericResponse> post(
-      {required String host, required String path, Map<String, String> body = const {}}) async {
+      {required String host,
+      required String path,
+      Map<String, String> body = const {}}) async {
     Uri url = Uri.https(host, path);
     http.Response response = await http.post(url, body: body);
     return _parseResponse(response);

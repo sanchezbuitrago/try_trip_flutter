@@ -1,3 +1,3 @@
-class GenericErrorInLoginProcess implements Exception{}
+class GenericErrorInLoginProcess implements Exception {}
 
-class ConnectionError implements Exception{}
+class ConnectionError implements Exception {}

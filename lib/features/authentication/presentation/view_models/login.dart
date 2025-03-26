@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:try_trip/features/authentication/domain/models/commands.dart';
 import 'package:try_trip/features/authentication/domain/models/exceptions.dart';
 import 'package:try_trip/features/authentication/domain/services/user.dart';
@@ -7,7 +8,9 @@ abstract class LoginState {}
 class LoginSuccessfulState extends LoginState {}
 
 class InvalidCredentialsState extends LoginState {}
+
 class GenericErrorState extends LoginState {}
+
 class ConnectionErrorState extends LoginState {}
 
 class LastEmailToLoginConsulted extends LoginState {
@@ -16,17 +19,16 @@ class LastEmailToLoginConsulted extends LoginState {
   LastEmailToLoginConsulted({this.email});
 }
 
-
 class LoginViewModel {
-
   UserController userController = UserController();
-  Future<LoginState> doLogin({required String email, required String pin}) async {
-    try{
+  Future<LoginState> doLogin(
+      {required String email, required String pin}) async {
+    try {
       await userController.doLogin(DoLoginCommand(email: email, pin: pin));
       return LoginSuccessfulState();
-    } on ConnectionError catch (e){
+    } on ConnectionError catch (e) {
       return ConnectionErrorState();
-    } catch (e){
+    } catch (e) {
       return InvalidCredentialsState();
     }
   }

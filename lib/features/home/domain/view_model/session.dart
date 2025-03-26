@@ -17,8 +17,7 @@ class UserInfo {
 class SessionViewModel {
   SecureStorage secureStorage = SecureStorage();
   Future<bool> sessionIsValid() async {
-    String? lastLoginAt =
-        await secureStorage.get(SecureStorageKey.lastLoginAt);
+    String? lastLoginAt = await secureStorage.get(SecureStorageKey.lastLoginAt);
     if (lastLoginAt != null) {
       print(lastLoginAt);
       DateTime dateTime = DateTime.parse(lastLoginAt);

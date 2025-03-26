@@ -1,10 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 // Project imports:
 import 'package:try_trip/core/services/routes.dart';
-
 import 'generated/l10n.dart';
 
 void main() {
