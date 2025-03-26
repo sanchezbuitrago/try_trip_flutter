@@ -12,7 +12,7 @@ class UserController {
   final SecureStorage _secureStorage = SecureStorage();
   final CustomLogger _logger = CustomLogger.instance;
 
-  void registerUser(RegisterUserCommand cmd) async {
+  Future<void> registerUser(RegisterUserCommand cmd) async {
     _logger.logInfo("Try to register user with email ${cmd.email}");
     const String host = "10.0.2.2:3030";
     const String path = "/users/login";

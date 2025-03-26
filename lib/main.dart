@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: AppRoutes.generateRoute,
       initialRoute: AppRoutes.home,
       localizationsDelegates: [
+        GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         S.delegate,

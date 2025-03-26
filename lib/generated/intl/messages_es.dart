@@ -60,5 +60,71 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Iniciar Sesion"),
     "loginVersionLabel": MessageLookupByLibrary.simpleMessage("TryTrip 0.0.0"),
+    "registerAppBarText": MessageLookupByLibrary.simpleMessage(
+      "Registro de Usuario",
+    ),
+    "registerFormActionButtonText": MessageLookupByLibrary.simpleMessage(
+      "Registrar Usuario",
+    ),
+    "registerFormCountryHeader": MessageLookupByLibrary.simpleMessage(
+      "Selecciona el país",
+    ),
+    "registerFormCountryHintText": MessageLookupByLibrary.simpleMessage(
+      "Buscar ...",
+    ),
+    "registerFormCountryLabelText": MessageLookupByLibrary.simpleMessage(
+      "Buscar país",
+    ),
+    "registerFormEmailLabelText": MessageLookupByLibrary.simpleMessage(
+      "Correo electrónico",
+    ),
+    "registerFormEmailNotFoundError": MessageLookupByLibrary.simpleMessage(
+      "Por favor ingrese su correo electronico",
+    ),
+    "registerFormEmailNotValidError": MessageLookupByLibrary.simpleMessage(
+      "El correo electrónico no cumple con el formato requerido",
+    ),
+    "registerFormLastNameLabelText": MessageLookupByLibrary.simpleMessage(
+      "Apellidos",
+    ),
+    "registerFormLastNameNotFoundError": MessageLookupByLibrary.simpleMessage(
+      "Por favor ingrese sus apellidos",
+    ),
+    "registerFormNameLabelText": MessageLookupByLibrary.simpleMessage("Nombre"),
+    "registerFormNameNotFoundError": MessageLookupByLibrary.simpleMessage(
+      "Por favor ingrese su nombre",
+    ),
+    "registerFormPINLabelText": MessageLookupByLibrary.simpleMessage("PIN"),
+    "registerFormPINNotFoundError": MessageLookupByLibrary.simpleMessage(
+      "Por favor ingrese su PIN",
+    ),
+    "registerFormPINNotValid": MessageLookupByLibrary.simpleMessage(
+      "El PIN debe tener 4 digitos",
+    ),
+    "registerFormPINsNotMatch": MessageLookupByLibrary.simpleMessage(
+      "Los PINs no coinciden",
+    ),
+    "registerFormPhoneNumberLabelText": MessageLookupByLibrary.simpleMessage(
+      "Número de telefono",
+    ),
+    "registerFormPhoneNumberNotFoundError":
+        MessageLookupByLibrary.simpleMessage(
+          "Por favor ingrese su número de teléfono",
+        ),
+    "registerFormSecondPINLabelText": MessageLookupByLibrary.simpleMessage(
+      "Confirmar PIN",
+    ),
+    "registerFormSecondPINNotFoundError": MessageLookupByLibrary.simpleMessage(
+      "Por favor ingrese su PIN",
+    ),
+    "registerFormSecondPINNotValid": MessageLookupByLibrary.simpleMessage(
+      "El PIN debe tener 4 digitos",
+    ),
+    "registerFormTitle": MessageLookupByLibrary.simpleMessage(
+      "Formulario de registro",
+    ),
+    "registerGenericError": MessageLookupByLibrary.simpleMessage(
+      "Error registrando el usuario",
+    ),
   };
 }
