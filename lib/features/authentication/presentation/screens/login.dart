@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _handleLoginSuccessfulState(LoginSuccessfulState state) {
     if (mounted) {
-      AppRoutes.resetTo(context, AppRoutes.home);
+      AppRoutes.resetTo(context, AppRoutes.restaurants);
     }
   }
 

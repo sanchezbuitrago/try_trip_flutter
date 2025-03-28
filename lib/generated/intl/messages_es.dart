@@ -55,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Por favor ingrese un correo válido",
     ),
     "loginForgotPINLink": MessageLookupByLibrary.simpleMessage(
-      "Olvidaste tú PIN ?",
+      "¿ Olvidaste tú PIN ?",
     ),
     "loginInvalidCredentialsMessage": MessageLookupByLibrary.simpleMessage(
       "Credenciales no validas",
@@ -140,6 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "registerGenericError": MessageLookupByLibrary.simpleMessage(
       "Error registrando el usuario",
+    ),
+    "restaurantsListTitle": MessageLookupByLibrary.simpleMessage(
+      "Restaurantes",
     ),
   };
 }

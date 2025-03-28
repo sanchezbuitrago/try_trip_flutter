@@ -18,7 +18,7 @@
   "loginPINLabelText": "PIN",
   "loginPINNotFoundError": "Por favor ingrese un PIN",
   "loginPINNotValidError": "El PIN no cumple con la longitud requerida",
-  "loginForgotPINLink": "Olvidaste tú PIN ?",
+  "loginForgotPINLink": "¿ Olvidaste tú PIN ?",
   "loginRegisterButtonLabel": "Registrate",
   "loginVersionLabel": "TryTrip 0.0.0",
   "registerGenericError": "Error registrando el usuario",
@@ -43,5 +43,6 @@
   "registerFormSecondPINNotFoundError": "Por favor ingrese su PIN",
   "registerFormSecondPINNotValid": "El PIN debe tener 4 digitos",
   "registerFormPINsNotMatch": "Los PINs no coinciden",
-  "registerFormActionButtonText": "Registrar Usuario"
+  "registerFormActionButtonText": "Registrar Usuario",
+  "restaurantsListTitle": "Restaurantes"
 }

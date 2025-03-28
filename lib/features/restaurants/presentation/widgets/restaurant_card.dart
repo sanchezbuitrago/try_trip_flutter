@@ -7,16 +7,19 @@ import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
 import 'package:try_trip/features/restaurants/domain/models/restaurants.dart';
+import 'package:try_trip/core/utils/logger.dart';
 
 class RestaurantCard extends StatelessWidget {
   final Restaurant restaurant;
   final Map<String, IconData> socialMediaIcons = {};
+  final CustomLogger _logger = CustomLogger.instance;
   RestaurantCard({super.key, required this.restaurant});
 
   Future<void> _launchURL(String url) async {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
+      _logger.logError("Error open the url $url");
       throw 'No se pudo abrir la URL: $url';
     }
   }
@@ -123,7 +126,7 @@ class RestaurantCard extends StatelessWidget {
                   ),
                   buildSocialMediaList(),
                   Text(
-                    "Description",
+                    restaurant.description,
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   )

@@ -225,10 +225,10 @@ class S {
     );
   }
 
-  /// `Olvidaste tú PIN ?`
+  /// `¿ Olvidaste tú PIN ?`
   String get loginForgotPINLink {
     return Intl.message(
-      'Olvidaste tú PIN ?',
+      '¿ Olvidaste tú PIN ?',
       name: 'loginForgotPINLink',
       desc: '',
       args: [],
@@ -480,6 +480,16 @@ class S {
     return Intl.message(
       'Registrar Usuario',
       name: 'registerFormActionButtonText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restaurantes`
+  String get restaurantsListTitle {
+    return Intl.message(
+      'Restaurantes',
+      name: 'restaurantsListTitle',
       desc: '',
       args: [],
     );

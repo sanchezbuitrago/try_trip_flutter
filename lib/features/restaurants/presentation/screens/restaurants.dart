@@ -6,6 +6,7 @@ import 'package:try_trip/core/widgets/drawer.dart';
 import 'package:try_trip/features/home/domain/view_model/session.dart';
 import 'package:try_trip/features/restaurants/domain/models/restaurants.dart';
 import 'package:try_trip/features/restaurants/presentation/widgets/restaurant_card.dart';
+import 'package:try_trip/generated/l10n.dart';
 
 class RestaurantsPage extends StatefulWidget {
   const RestaurantsPage({super.key});
@@ -62,7 +63,7 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: Text(
-          "Restaurantes",
+          S.of(context).restaurantsListTitle,
           style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),

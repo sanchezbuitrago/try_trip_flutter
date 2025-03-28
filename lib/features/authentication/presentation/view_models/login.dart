@@ -23,6 +23,8 @@ class LoginViewModel {
   UserController userController = UserController();
   Future<LoginState> doLogin(
       {required String email, required String pin}) async {
+    // TODO: Delete after implement service calling
+    return LoginSuccessfulState();
     try {
       await userController.doLogin(DoLoginCommand(email: email, pin: pin));
       return LoginSuccessfulState();
