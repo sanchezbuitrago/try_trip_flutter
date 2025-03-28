@@ -1,12 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:intl/intl.dart';
-
-// Project imports:
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -34,9 +28,10 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -65,6 +60,56 @@ class S {
     return Intl.message('Hello', name: 'hello', desc: '', args: []);
   }
 
+  /// `¿ Olvidaste tú PIN ?`
+  String get forgotPINTitle {
+    return Intl.message(
+      '¿ Olvidaste tú PIN ?',
+      name: 'forgotPINTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Correo electrónico`
+  String get forgotPINFormEmail {
+    return Intl.message(
+      'Correo electrónico',
+      name: 'forgotPINFormEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por favor ingrese su correo electrónico`
+  String get forgotPINFormEmailNotFoundError {
+    return Intl.message(
+      'Por favor ingrese su correo electrónico',
+      name: 'forgotPINFormEmailNotFoundError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por favor ingrese un correo válido`
+  String get forgotPINFormEmailNotValidError {
+    return Intl.message(
+      'Por favor ingrese un correo válido',
+      name: 'forgotPINFormEmailNotValidError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Generar Nuevo PIN`
+  String get forgotPINActionButton {
+    return Intl.message(
+      'Generar Nuevo PIN',
+      name: 'forgotPINActionButton',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Iniciar Sesion`
   String get loginActionButton {
     return Intl.message(
@@ -75,10 +120,10 @@ class S {
     );
   }
 
-  /// `¿ Eres usuario nuevo ?`
+  /// `¿ Eres usuario nuevo ? `
   String get loginNewUserText {
     return Intl.message(
-      '¿ Eres usuario nuevo ?',
+      '¿ Eres usuario nuevo ? ',
       name: 'loginNewUserText',
       desc: '',
       args: [],

@@ -2,9 +2,11 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
+import 'package:try_trip/core/model/constants.dart';
 import 'package:try_trip/core/widgets/alerts.dart';
 import 'package:try_trip/core/widgets/buttons.dart';
 import 'package:try_trip/core/widgets/text_form_fields.dart';
+import 'package:try_trip/generated/l10n.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -26,7 +28,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   void submit() {
     if (_formKey.currentState?.validate() ?? false) {
-      print("Enviar correo");
+      print("Consumir servicio para enviar correo");
     }
   }
 
@@ -57,7 +59,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         padding: EdgeInsets.symmetric(vertical: 20),
                         child: Center(
                           child: Text(
-                            "¿ Olvidaste tú PIN ?",
+                            S.of(context).forgotPINTitle,
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onSecondary,
@@ -68,17 +70,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       ),
                       DefaultTextFormField(
                         controller: _emailController,
-                        labelText: 'Correo electrónico',
+                        labelText: S.of(context).forgotPINFormEmail,
                         textInputType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Por favor ingrese su correo electrónico';
+                            return S
+                                .of(context)
+                                .forgotPINFormEmailNotFoundError;
                           }
                           // Validación simple para correo
-                          if (!RegExp(
-                                  r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                              .hasMatch(value)) {
-                            return 'Por favor ingrese un correo válido';
+                          if (!RegExp(emailRegex).hasMatch(value)) {
+                            return S
+                                .of(context)
+                                .forgotPINFormEmailNotValidError;
                           }
                           return null;
                         },
@@ -89,7 +93,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           Expanded(
                               child: DefaultButtonNavigationBar(
                             onPressed: submit,
-                            child: Text("Generar Nuevo PIN"),
+                            child: Text(S.of(context).forgotPINActionButton),
                           ))
                         ],
                       ),
